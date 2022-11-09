@@ -1,0 +1,13 @@
+# Dockerfile for Jenkins agent with Docker CLI installed
+
+# Replace with the desired version, see https://hub.docker.com/r/jenkins/inbound-agent/tags
+ARG JENKINS_INBOUND_AGENT_VERSION=4.10-3-alpine-jdk11
+FROM jenkins/inbound-agent:${JENKINS_INBOUND_AGENT_VERSION}
+
+# we need root access to use dind
+ARG user=root
+
+USER root
+RUN apk add docker
+
+USER ${user}
